@@ -205,11 +205,12 @@ class Docker(Driver):
     def default_ssh_connection_options(self):
         return []
 
-    def login_options(self, instance_name):
-        return {'instance': instance_name}
+    def login_options(self, instance_host):
+        return {'instance': instance_host}
 
-    def ansible_connection_options(self, instance_name):
+    def ansible_connection_options(self, instance_host):
         x = {'ansible_connection': 'docker'}
+        x['ansible_host'] = instance_host
         if 'DOCKER_HOST' in os.environ:
             x['ansible_docker_extra_args'] = "-H={}".format(os.environ['DOCKER_HOST'])
         return x

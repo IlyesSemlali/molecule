@@ -353,7 +353,7 @@ def validate_parallel_cmd_args(cmd_args):
 
 def _parallelize_platforms(config, run_uuid):
     def parallelize(platform):
-        platform['name'] = '{}-{}'.format(platform['name'], run_uuid)
+        platform['host'] = '{}-{}'.format(platform['name'], run_uuid)
         return platform
 
     return [parallelize(platform) for platform in config['platforms']]
